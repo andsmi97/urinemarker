@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1)
@@ -22,6 +22,7 @@ const Welcome = () => {
       {/* Logo */}
       <div className={classes.buttonsWrapper}>
         <Button
+          component={Link} to={'/camera'}
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -29,6 +30,7 @@ const Welcome = () => {
           Сделать Тест
         </Button>
         <Button
+        component={Link} to={'/signin'}
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -36,6 +38,7 @@ const Welcome = () => {
           Войти
         </Button>
         <Button
+        component={Link} to={'/signup'}
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -43,6 +46,7 @@ const Welcome = () => {
           Регистрация
         </Button>
         <Button
+        // component={Link} to={'/camera'}
           variant="contained"
           color="secondary"
           className={classes.button}

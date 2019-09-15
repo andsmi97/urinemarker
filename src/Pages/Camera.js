@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import CameraIcon from "@material-ui/icons/Camera";
-
+import {Link} from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   camera: {
     width: "100%",
@@ -26,17 +26,17 @@ const useStyles = makeStyles(theme => ({
   },
   returnButton: {
     color: "white",
-    alignSelf:"flex-start"
+    alignSelf: "flex-start"
   },
   captureButton: {
     color: "white"
   },
-  buttons:{
-    display:"flex",
-    flexDirection:"column",
+  buttons: {
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "space-between",
-    alignItems:"center",
-    height:"100vh",
+    alignItems: "center",
+    height: "100vh",
     padding: 8
   }
 }));
@@ -65,13 +65,20 @@ const Camera = () => {
       />
       <div className={classes.rectangle}></div>
       <div className={classes.buttons}>
-        <IconButton aria-label="Назад" className={classes.returnButton}>
+        <IconButton
+          aria-label="Назад"
+          className={classes.returnButton}
+          component={Link}
+          to={"/"}
+        >
           <ArrowBack />
         </IconButton>
         <IconButton
           aria-label="Cнимок"
-          onClick={capture}
+          // onClick={capture}
           className={classes.captureButton}
+          component={Link}
+          to={"/result"}
         >
           <CameraIcon />
         </IconButton>

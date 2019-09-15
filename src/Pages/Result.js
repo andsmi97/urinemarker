@@ -3,10 +3,11 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import ResultCard from "../Components/ResultCard";
+import {Link} from "react-router-dom"
 const Result = props => {
   return (
     <>
-      <IconButton aria-label="Назад">
+      <IconButton aria-label="Назад" component={Link} to={'/'}>
         <ArrowBack />
       </IconButton>
       {props.description}
@@ -18,7 +19,7 @@ const Result = props => {
           metric={result.metric}
         />
       ))}
-      <Button variant="contained" color="secondary">
+      <Button variant="contained" color="secondary" component={Link} to={'/home'}>
         Отправить врачу
       </Button>
     </>

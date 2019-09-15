@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345
@@ -19,7 +19,7 @@ const AnalysisCard = props => {
     1}/${props.date.getFullYear()}`;
   const time = `${props.date.getHours()}:${props.date.getMinutes()}`;
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} component={Link} to={"/result"}>
       <CardHeader
         avatar={
           <Avatar

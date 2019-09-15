@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
 import MenuIcon from "@material-ui/icons/Menu";
 import AddIcon from "@material-ui/icons/Add";
-
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
   appBar: {
     top: "auto",
@@ -28,10 +28,10 @@ const BottomMenu = () => {
     <>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="открыть меню">
+          <IconButton edge="start" color="inherit" aria-label="открыть меню" component={Link} to={'/welcome'}>
             <MenuIcon />
           </IconButton>
-          <Fab color="secondary" aria-label="add" className={classes.fabButton}>
+          <Fab color="secondary" aria-label="add" className={classes.fabButton} component={Link} to={'/camera'}>
             <AddIcon />
           </Fab>
         </Toolbar>
