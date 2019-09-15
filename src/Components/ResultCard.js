@@ -20,7 +20,7 @@ const ResultCard = props => {
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
+            <Avatar aria-label="short-name" className={classes.avatar}>
               {props.shortName}
             </Avatar>
           }

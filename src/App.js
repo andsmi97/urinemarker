@@ -3,9 +3,9 @@ import { Route, Switch } from "react-router-dom";
 import {
   MuiThemeProvider,
   createMuiTheme,
-  withStyles
+
 } from "@material-ui/core/styles";
-import CssBaseline from '@material-ui/core/CssBaseline'
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Loader from "./Components/Loader";
 import Home from "./Pages/Home";
 import Welcome from "./Pages/Welcome";
@@ -13,6 +13,7 @@ import { BrowserRouter } from "react-router-dom";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Result from "./Pages/Result";
+import Camera from "./Pages/Camera";
 
 // const styles = {
 //   "@global": {
@@ -42,11 +43,10 @@ const results = [
 
 const description = "Тест от 17.09.2019";
 const App = () => {
-  const [appLoaded, loadApp] = useState(true);
-  // const currentUser = useState(null);
+  const [appLoaded] = useState(true);
   return (
     <MuiThemeProvider theme={theme}>
-      
+      <CssBaseline />
       <BrowserRouter>
         <Switch>
           {appLoaded ? (
@@ -55,6 +55,7 @@ const App = () => {
               <Route exact path="/home" component={Home} />
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/camera" component={Camera} />
               <Route
                 exact
                 path="/result"
@@ -72,4 +73,4 @@ const App = () => {
   );
 };
 
-export default withStyles(styles)(App);
+export default App;
