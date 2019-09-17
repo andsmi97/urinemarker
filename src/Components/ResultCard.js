@@ -6,7 +6,9 @@ import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
+    width: 345,
+    margin: 16,
+    minHeight: 75
   },
   avatar: {
     backgroundColor: theme.palette.secondary.main
@@ -19,6 +21,7 @@ const ResultCard = props => {
     <>
       <Card className={classes.card}>
         <CardHeader
+          className={classes.header}
           avatar={
             <Avatar aria-label="short-name" className={classes.avatar}>
               {props.shortName}

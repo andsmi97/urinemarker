@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+
+import {
+  auth,
+  signInWithGoogle,
+  createUserProfileDocument
+} from "../firebase/utils.js";
+
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
@@ -23,17 +30,38 @@ const useStyles = makeStyles(theme => ({
   },
   background: {
     backgroundColor: theme.palette.primary.light,
-    height:"100vh",
-    width:"100vw",
+    height: "100vh",
+    width: "100vw"
   }
 }));
 
 const SignIn = () => {
   const classes = useStyles();
+  const [inProgress, setInProgress] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const changeEmail = e => setEmail(e.target.value);
+  const changePassword = e => setPassword(e.target.value);
+  const changeUsername = e => setUsername(e.target.value);
+
+  const onSignInSubmit = async event => {
+    event.preventDefault();
+    setInProgress(true);
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setInProgress(false);
+    } catch (e) {
+      setInProgress(false);
+      console.log(e);
+    }
+  };
+
   return (
     <div className={classes.background}>
       {/* Logo */}
-      <form className={classes.container}>
+      <form className={classes.container} onSubmit={onSignInSubmit}>
         <TextField
           id="login-input"
           label="Логин"
@@ -44,6 +72,8 @@ const SignIn = () => {
           margin="normal"
           variant="outlined"
           shrink
+          value={username}
+          onChange={changeUsername}
         />
         <TextField
           id="password-inupt"
@@ -55,10 +85,13 @@ const SignIn = () => {
           margin="normal"
           variant="outlined"
           shrink
+          value={password}
+          onChange={changePassword}
         />
         <div className={classes.buttonsWrapper}>
           <Button
-          component={Link} to={'/'}
+            component={Link}
+            to={"/"}
             variant="contained"
             color="secondary"
             className={classes.button}
@@ -66,18 +99,23 @@ const SignIn = () => {
             Отмена
           </Button>
           <Button
-          component={Link} to={'/home'}
+            type="submit"
             variant="contained"
             color="secondary"
             className={classes.button}
+            disabled={inProgress}
           >
             Войти
           </Button>
         </div>
-        {/* Login Field */}
-        {/* Password Field*/}
-        {/* Cancel Button*/}
-        {/* Submit Button*/}
+        <Button
+          onClick={signInWithGoogle}
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+        >
+          Войти c помощью google
+        </Button>
       </form>
     </div>
   );

@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-
-} from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Loader from "./Components/Loader";
 import Home from "./Pages/Home";
@@ -14,36 +10,66 @@ import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Result from "./Pages/Result";
 import Camera from "./Pages/Camera";
-
-// const styles = {
-//   "@global": {
-//     "*": {
-//       margin: 0,
-//       padding: 0
-//     }
-//   }
-// };
-
+import {
+  auth,
+  signInWithGoogle,
+  createUserProfileDocument
+} from "./firebase/utils.js";
+import agent from "./agent";
+import { createSubstancesArray } from "./substances.js";
 const theme = createMuiTheme({
   palette: {
-    primary: { main: "#66BB6A", light: "#338A3E", dark: "#338A3E" },
+    primary: { main: "#66BB6A", light: "#98ee99", dark: "#338A3E" },
     secondary: { main: "#0288D1", light: "#5EB8FF", dark: "#005B9F" }
   }
 });
 
-const results = [
-  {
-    fullName: "Лейкоциты",
-    shortName: "LEI",
-    value: 125,
-    metric: "Cells/L"
-  },
-  { fullName: "Нитраты", shortName: "NIT", value: "-", metric: "" }
-];
+const response = {
+  date: new Date(),
+  substances: {
+    lei: 125,
+    ket: 0,
+    nit: false,
+    uro: 33,
+    bil: 0,
+    pro: 0.15,
+    glu: 0,
+    sg: 1.025,
+    bld: 200,
+    ph: 5.0
+  }
+};
 
 const description = "Тест от 17.09.2019";
 const App = () => {
-  const [appLoaded] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [appLoaded, setAppLoaded] = useState(true);
+  const results = createSubstancesArray(response);
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const token = await userAuth.getIdToken();
+        console.log(token);
+        agent.setToken(token);
+        const userRef = await createUserProfileDocument(userAuth);
+        if (userRef === undefined) {
+          setCurrentUser(userAuth);
+        } else {
+          userRef.onSnapshot(snapShot => {
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+              token,
+              photoURL: userAuth.photoURL
+            });
+          });
+        }
+      } else {
+        setCurrentUser(userAuth);
+      }
+    });
+    return () => unsubscribeFromAuth();
+  }, []);
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
@@ -51,10 +77,26 @@ const App = () => {
         <Switch>
           {appLoaded ? (
             <>
-              <Route exact path="/" component={Welcome} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/signin" component={SignIn} />
-              <Route exact path="/signup" component={SignUp} />
+              <Route
+                exact
+                path="/"
+                render={() => (currentUser ? <Home /> : <Welcome />)}
+              />
+              <Route
+                exact
+                path="/home"
+                render={() => (currentUser ? <Home /> : <Welcome />)}
+              />
+              <Route
+                exact
+                path="/signin"
+                render={() => (currentUser ? <Home /> : <SignIn />)}
+              />
+              <Route
+                exact
+                path="/signup"
+                render={() => (currentUser ? <Home /> : <SignUp />)}
+              />
               <Route exact path="/camera" component={Camera} />
               <Route
                 exact
