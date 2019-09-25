@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 const useStyles = makeStyles(theme => ({
   card: {
     width: 345,
-    margin: 16,
+    margin: 8,
     minHeight: 75
   },
   avatar: {

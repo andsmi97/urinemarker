@@ -26,6 +26,11 @@ const useStyles = makeStyles(theme => ({
   buttonsWrapper: {
     display: "flex",
     justifyContent: "space-between"
+  },
+  background: {
+    height: "100vh",
+    width: "100vw",
+    background: theme.palette.primary.light
   }
 }));
 
@@ -56,9 +61,9 @@ const SignUp = () => {
   };
   const classes = useStyles();
   return (
-    <div className="backgorund">
+    <div className={classes.background}>
       {/* Logo */}
-      <form className={classes.container}>
+      <form className={classes.container} onSubmit={onSignUpSubmit}>
         <TextField
           id="email-input"
           label="Email"
@@ -71,7 +76,7 @@ const SignUp = () => {
           onChange={changeEmail}
           value={email}
         />
-        <TextField
+        {/* <TextField
           id="login-input"
           label="Логин"
           className={classes.textField}
@@ -83,7 +88,7 @@ const SignUp = () => {
           shrink
           value={username}
           onChange={changeUsername}
-        />
+        /> */}
         <TextField
           id="password-inupt"
           label="Пароль"
@@ -114,8 +119,9 @@ const SignUp = () => {
             type="submit"
             disabled={inProgress}
           >
-            Войти
+            Регистрация
           </Button>
+        </div>
           <Button
             onClick={signInWithGoogle}
             variant="contained"
@@ -125,7 +131,6 @@ const SignUp = () => {
           >
             Войти с Google
           </Button>
-        </div>
         {/* Login Field */}
         {/* Password Field*/}
         {/* Cancel Button*/}

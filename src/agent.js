@@ -4,7 +4,7 @@ import _superagent from "superagent";
 const superagent = superagentPromise(_superagent, global.Promise);
 
 //TODO CHANGE API ROUTE
-const API_ROOT = "https://us-central1-todoapp-82755.cloudfunctions.net/api";
+const API_ROOT = "http://185.254.190.74/api";
 
 const responseBody = res => res.body;
 
@@ -38,8 +38,24 @@ const requests = {
       .then(responseBody)
 };
 
+const limit = (count, p) => `limit=${count}&skip=${p ? p * count : 0}`;
+const Analyzes = {
+  //pagination doesn't work properly, you will only see last 50 articles
+  all: page => requests.get(`/analyzes?${limit(50, page)}`),
+  create: post => requests.post("/analyzes", post),
+  one: id => requests.get(`/analyzes/${id}`)
+};
+
+const ColorDetector = {
+  predict: formData =>
+    superagent
+      .post("35.240.32.160:5000/api/v1/predict", formData)
+      .then(responseBody)
+};
 export default {
   setToken: _token => {
     token = _token;
-  }
+  },
+  Analyzes,
+  ColorDetector
 };

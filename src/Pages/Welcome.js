@@ -1,31 +1,37 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import {Link} from 'react-router-dom'
-import {
-  auth,
-  signInWithGoogle,
-  createUserProfileDocument
-} from "../firebase/utils.js";
+import { Link } from "react-router-dom";
+import { signInWithGoogle } from "../firebase/utils.js";
 const useStyles = makeStyles(theme => ({
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: 240
   },
   buttonsWrapper: {
-    display:"flex",
-    justifyContent:"center",
-    flexDirection:"column"
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column"
+  },
+  background: {
+    height: "100vh",
+    width: "100vw",
+    background: theme.palette.primary.light,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
 
 const Welcome = () => {
   const classes = useStyles();
   return (
-    <div className="backgorund">
+    <div className={classes.background}>
       {/* Logo */}
       <div className={classes.buttonsWrapper}>
         <Button
-          component={Link} to={'/camera'}
+          component={Link}
+          to={"/camera"}
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -33,7 +39,8 @@ const Welcome = () => {
           Сделать Тест
         </Button>
         <Button
-        component={Link} to={'/signin'}
+          component={Link}
+          to={"/signin"}
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -41,7 +48,8 @@ const Welcome = () => {
           Войти
         </Button>
         <Button
-        component={Link} to={'/signup'}
+          component={Link}
+          to={"/signup"}
           variant="contained"
           color="secondary"
           className={classes.button}

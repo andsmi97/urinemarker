@@ -64,16 +64,16 @@ const SignIn = () => {
       <form className={classes.container} onSubmit={onSignInSubmit}>
         <TextField
           id="login-input"
-          label="Логин"
+          label="Email"
           className={classes.textField}
           type="text"
-          name="login"
-          autoComplete="login"
+          name="Email"
+          autoComplete="email"
           margin="normal"
           variant="outlined"
           shrink
-          value={username}
-          onChange={changeUsername}
+          value={email}
+          onChange={changeEmail}
         />
         <TextField
           id="password-inupt"

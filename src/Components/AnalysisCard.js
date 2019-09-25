@@ -6,7 +6,9 @@ import Avatar from "@material-ui/core/Avatar";
 import { Link } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
+    width: 345,
+    margin: 8,
+    textDecoration: "none"
   },
   avatar: {
     backgroundColor: theme.palette.secondary.main
@@ -15,21 +17,33 @@ const useStyles = makeStyles(theme => ({
 
 const AnalysisCard = props => {
   const classes = useStyles();
-  const day = `${props.date.getDate()}/${props.date.getMonth() +
-    1}/${props.date.getFullYear()}`;
-  const time = `${props.date.getHours()}:${props.date.getMinutes()}`;
+  const date = new Date(props.date);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const dayTitle = `${day > 9 ? day : `0${day}`}/${
+    month > 9 ? month : `0${month}`
+  }/${year}`;
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const timeTitle = `${hours > 9 ? hours : `0${hours}`}:${
+    minutes > 9 ? minutes : `0${minutes}`
+  }`;
+
   return (
-    <Card className={classes.card} component={Link} to={"/result"}>
+    <Card className={classes.card} component={Link} to={`/result/${props.id}`}>
       <CardHeader
         avatar={
           <Avatar
             aria-label="photo"
             className={classes.avatar}
-            src={props.img}
+            src={
+              "https://sun9-27.userapi.com/c851324/v851324578/1bf53b/SGMgouRUYqY.jpg"
+            }
           />
         }
-        title={day}
-        subheader={time}
+        title={dayTitle}
+        subheader={timeTitle}
       />
     </Card>
   );

@@ -12,7 +12,6 @@ import Result from "./Pages/Result";
 import Camera from "./Pages/Camera";
 import {
   auth,
-  signInWithGoogle,
   createUserProfileDocument
 } from "./firebase/utils.js";
 import agent from "./agent";
@@ -29,7 +28,7 @@ const response = {
   substances: {
     lei: 125,
     ket: 0,
-    nit: false,
+    nit: 0,
     uro: 33,
     bil: 0,
     pro: 0.15,
@@ -40,13 +39,15 @@ const response = {
   }
 };
 
-const description = "Тест от 17.09.2019";
+// const description = "Тест от 17.09.2019";
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [appLoaded, setAppLoaded] = useState(true);
+  const [appLoaded, setAppLoaded] = useState(false);
+  const [authPending, setAuthPending] = useState(true);
   const results = createSubstancesArray(response);
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      setAuthPending(true);
       if (userAuth) {
         const token = await userAuth.getIdToken();
         console.log(token);
@@ -67,6 +68,8 @@ const App = () => {
       } else {
         setCurrentUser(userAuth);
       }
+      setAuthPending(false);
+      setAppLoaded(true);
     });
     return () => unsubscribeFromAuth();
   }, []);
@@ -75,7 +78,7 @@ const App = () => {
       <CssBaseline />
       <BrowserRouter>
         <Switch>
-          {appLoaded ? (
+          {appLoaded && !authPending ? (
             <>
               <Route
                 exact
@@ -100,9 +103,9 @@ const App = () => {
               <Route exact path="/camera" component={Camera} />
               <Route
                 exact
-                path="/result"
-                render={() => (
-                  <Result results={results} description={description} />
+                path="/result/:id"
+                component={(e) => (
+                  <Result id={e.match.params.id}/>
                 )}
               />
             </>

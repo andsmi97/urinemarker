@@ -4,7 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import CameraIcon from "@material-ui/icons/Camera";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import agent from "../agent";
 const useStyles = makeStyles(theme => ({
   camera: {
     width: "100%",
@@ -48,10 +49,23 @@ const Camera = () => {
   const classes = useStyles();
   const webcamRef = useRef(null);
 
-  const capture = useCallback(() => {
+  const capture = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     //actions with image here
-    console.log(imageSrc);
+    const res = await fetch(imageSrc);
+    const blob = await res.blob();
+    const formData = new FormData();
+    formData.append("error", blob);
+    const predicted = await fetch("https://35.240.32.160:5000/api/v1/predict", {
+      method: "POST",
+      headers:{
+      "Content-Type":"multipart/form-data"},
+      body: formData
+    });
+    // const predicted = await agent.ColorDetector.predict(formData);
+
+    console.log(predicted);
+    // console.log(blob);
   }, [webcamRef]);
 
   return (
@@ -75,10 +89,10 @@ const Camera = () => {
         </IconButton>
         <IconButton
           aria-label="Cнимок"
-          // onClick={capture}
+          onClick={capture}
           className={classes.captureButton}
-          component={Link}
-          to={"/result"}
+          // component={Link}
+          // to={"/result"}
         >
           <CameraIcon />
         </IconButton>
