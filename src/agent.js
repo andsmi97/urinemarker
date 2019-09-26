@@ -4,7 +4,7 @@ import _superagent from "superagent";
 const superagent = superagentPromise(_superagent, global.Promise);
 
 //TODO CHANGE API ROUTE
-const API_ROOT = "http://185.254.190.74/api";
+const API_ROOT = "https://urinemark.ru/api";
 
 const responseBody = res => res.body;
 
@@ -45,7 +45,10 @@ const Analyzes = {
   create: post => requests.post("/analyzes", post),
   one: id => requests.get(`/analyzes/${id}`)
 };
-
+const Image = {
+  predict: (formData)=> requests.post('/image', formData),
+  logBinary: (base64)=>requests.post('/image/bin', {base64})
+}
 const ColorDetector = {
   predict: formData =>
     superagent
@@ -57,5 +60,6 @@ export default {
     token = _token;
   },
   Analyzes,
-  ColorDetector
+  ColorDetector,
+  Image
 };

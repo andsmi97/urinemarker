@@ -26,7 +26,7 @@ const theme = createMuiTheme({
 const response = {
   date: new Date(),
   substances: {
-    lei: 125,
+    leu: 125,
     ket: 0,
     nit: 0,
     uro: 33,

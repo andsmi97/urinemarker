@@ -13,7 +13,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
+    overflowY: "scroll",
+    paddingBottom: 100
   },
   title: {
     textAlign: "center"
@@ -43,8 +45,8 @@ const Home = () => {
             id={analysis._id}
           />
         ))}
-        <BottomMenu />
       </div>
+      <BottomMenu />
     </>
   );
 };
