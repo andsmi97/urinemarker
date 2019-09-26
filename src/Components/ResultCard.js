@@ -30,6 +30,7 @@ const ResultCard = props => {
           title={props.fullName}
           subheader={`${props.value} ${props.metric}`}
         />
+        <div>render</div>
       </Card>
       {/* Component Difference*/}
       {/* Component Status*/}

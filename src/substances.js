@@ -1,6 +1,6 @@
 export const names = {
-  LEI: {
-    shortName: "LEI",
+  LEU: {
+    shortName: "LEU",
     fullName: "Лейкоциты",
     metric: "клеток/микролитр"
   },
@@ -22,7 +22,7 @@ export const names = {
 // const resExample = {
 //   date: "timestamp",
 //   substances: {
-//     lei: "number",
+//     leu: "number",
 //     ket: "number",
 //     nit: "boolean",
 //     uro: "number",
