@@ -1,11 +1,15 @@
 import React, { useRef, useCallback, useState } from "react";
-import Webcam from "react-webcam";
+// import Webcam from "react-webcam";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import CameraIcon from "@material-ui/icons/Camera";
 import { Link, Redirect } from "react-router-dom";
 import agent from "../agent";
+// import WebCam, {IMAGE_TYPES, FACING_MODES} from 'react-html5-camera-photo';
+// import 'react-html5-camera-photo/build/css/index.css';
+// import WebCam from 'react-dom-camera';
+import { Camera as WebCam } from '../lib';
 import { stringify } from "querystring";
 const useStyles = makeStyles(theme => ({
   camera: {
@@ -54,14 +58,95 @@ const videoConstraints = {
 
 const Camera = () => {
   const classes = useStyles();
-  const webcamRef = useRef(null);
+  const cam = useRef(null);
   const [result, setResult] = useState({});
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const capture = useCallback(async () => {
+
+  const onTakePhoto = (imageSrc)=>{
     setError(false);
-    const imageSrc = webcamRef.current.getScreenshot();
+    // const imageSrc = webcamRef.current.getScreenshot();
+    //actions with image here
+    // const dataURItoBlob = dataURI => {
+    //   // convert base64/URLEncoded data component to raw binary data held in a string
+    //   let byteString;
+    //   if (dataURI.split(",")[0].indexOf("base64") >= 0)
+    //     byteString = atob(dataURI.split(",")[1]);
+    //   else byteString = unescape(dataURI.split(",")[1]);
+
+    //   // separate out the mime component
+    //   const mimeString = dataURI
+    //     .split(",")[0]
+    //     .split(":")[1]
+    //     .split(";")[0];
+
+    //   // write the bytes of the string to a typed array
+    //   const ia = new Uint8Array(byteString.length);
+    //   for (let i = 0; i < byteString.length; i++) {
+    //     ia[i] = byteString.charCodeAt(i);
+    //   }
+
+    //   return new Blob([ia], { type: mimeString });
+    // };
+    // const blob = dataURItoBlob(imageSrc);
+    fetch(imageSrc)
+      .then(res => res.blob())
+      .then(async blob => {
+        const formData = new FormData();
+        console.log(imageSrc.slice(23))
+        // formData.append("image", '123');
+        // formData.append("image", imageSrc.slice(23));
+        formData.append("image", blob);
+        const data = await fetch(
+          "https://urinemark-service-m6gmo7ik7q-ew.a.run.app/api/v1/predict",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({image:imageSrc.slice(23)})
+          }
+        );
+        // const savedImage = await fetch("https://urinemark.ru/api/image", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "multipart/form-data"
+        //   },
+        //   body: formData
+        // });
+        console.log("saved")
+        const predicted = await data.json();
+        const savedImage = await agent.Image.predict(formData);
+        const logBinary = await agent.Image.logBinary(imageSrc);
+
+        console.log(predicted);
+        if (!predicted.error) {
+          const response = await agent.Analyzes.create(predicted);
+          // const response = await agent.Analyzes.create({
+          //   LEU: 0,
+          //   BIL: 0,
+          //   BLD: 0,
+          //   GLU: 0,
+          //   KET: 0,
+          //   NIT: 0,
+          //   PRO: 0,
+          //   SG: 0,
+          //   URO: 0,
+          //   pH: 0
+          // });
+          setResult(response);
+          setRedirect(true);
+        } else {
+          setError(true);
+          setErrorMessage(predicted.error);
+          //show error message
+        }
+      });
+  }
+  const capture = async (img) => {
+    setError(false);
+    const imageSrc = cam.current.capture(img);
     //actions with image here
     // const dataURItoBlob = dataURI => {
     //   // convert base64/URLEncoded data component to raw binary data held in a string
@@ -141,14 +226,41 @@ const Camera = () => {
     // const blob = await res.blob();
 
     // console.log(blob);
-  }, [webcamRef]);
+  };
 
   if (redirect) {
     return <Redirect to={`/result/${result._id}`} />;
   }
   return (
     <>
-      <Webcam
+    {/* <WebCam
+    // captureButtonRenderer={onClick => <CoolButton onClick={onClick} />}
+    onTakePhoto={onTakePhoto}
+  /> */}
+  <WebCam
+        showFocus={true}
+        front={false}
+        capture={capture}
+        ref={cam}
+        width="100%"
+        height="auto"
+        focusWidth="100%"
+        focusHeight="60%"
+        btnColor="white"
+        className={classes.camera}
+      />
+      {/* <WebCam
+        onTakePhoto = { onTakePhoto }
+        className={classes.camera}
+        imageType={IMAGE_TYPES.JPG}
+        imageCompression={1}
+        isSilentMode={true}
+        isMaxResolution={true}
+        isFullScreen={true}
+        idealFacingMode = {FACING_MODES.ENVIRONMENT}
+        isImageMirror={false}
+      /> */}
+      {/* <Webcam
         className={classes.camera}
         audio={false}
         ref={webcamRef}
@@ -156,7 +268,7 @@ const Camera = () => {
         videoConstraints={videoConstraints}
         screenshotQuality={1}
         minScreenshotHeight={1600}
-      />
+      /> */}
       <div className={classes.rectangle}></div>
       {error && <div className={classes.errorText}>{errorMessage}</div>}
       <div className={classes.buttons}>
@@ -170,7 +282,7 @@ const Camera = () => {
         </IconButton>
         <IconButton
           aria-label="Cнимок"
-          onClick={capture}
+          onClick={img => cam.current.capture(img)}
           className={classes.captureButton}
           // component={Link}
           // to={"/result"}
