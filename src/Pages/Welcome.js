@@ -29,7 +29,7 @@ const Welcome = () => {
     <div className={classes.background}>
       {/* Logo */}
       <div className={classes.buttonsWrapper}>
-        <Button
+        {/* <Button
           component={Link}
           to={"/camera"}
           variant="contained"
@@ -37,7 +37,7 @@ const Welcome = () => {
           className={classes.button}
         >
           Сделать Тест
-        </Button>
+        </Button> */}
         <Button
           component={Link}
           to={"/signin"}

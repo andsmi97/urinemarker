@@ -49,6 +49,9 @@ const Image = {
   predict: (formData)=> requests.post('/image', formData),
   logBinary: (base64)=>requests.post('/image/bin', {base64})
 }
+ const Log = {
+  send: (log) => requests.post('/log', log)
+}
 const ColorDetector = {
   predict: formData =>
     superagent
