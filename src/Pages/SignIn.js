@@ -1,50 +1,44 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
-import {
-  auth,
-  signInWithGoogle,
-  createUserProfileDocument
-} from "../firebase/utils.js";
+import { auth, signInWithGoogle } from '../firebase/utils.js';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    flexDirection: "column"
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   textField: {
     marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   buttonsWrapper: {
-    display: "flex",
-    justifyContent: "space-between"
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   background: {
     backgroundColor: theme.palette.primary.light,
-    height: "100vh",
-    width: "100vw"
-  }
+    height: '100vh',
+    width: '100vw',
+  },
 }));
 
 const SignIn = () => {
   const classes = useStyles();
   const [inProgress, setInProgress] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const changeEmail = e => setEmail(e.target.value);
   const changePassword = e => setPassword(e.target.value);
-  const changeUsername = e => setUsername(e.target.value);
 
   const onSignInSubmit = async event => {
     event.preventDefault();
@@ -91,7 +85,7 @@ const SignIn = () => {
         <div className={classes.buttonsWrapper}>
           <Button
             component={Link}
-            to={"/"}
+            to={'/'}
             variant="contained"
             color="secondary"
             className={classes.button}

@@ -1,48 +1,46 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 import {
   auth,
   signInWithGoogle,
-  createUserProfileDocument
-} from "../firebase/utils.js";
+  createUserProfileDocument,
+} from '../firebase/utils.js';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    flexDirection: "column"
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   textField: {
     marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   buttonsWrapper: {
-    display: "flex",
-    justifyContent: "space-between"
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   background: {
-    height: "100vh",
-    width: "100vw",
-    background: theme.palette.primary.light
-  }
+    height: '100vh',
+    width: '100vw',
+    background: theme.palette.primary.light,
+  },
 }));
 
 const SignUp = () => {
   const [inProgress, setInProgress] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const changeEmail = e => setEmail(e.target.value);
   const changePassword = e => setPassword(e.target.value);
-  const changeUsername = e => setUsername(e.target.value);
 
   const onSignUpSubmit = async event => {
     event.preventDefault();
@@ -55,14 +53,13 @@ const SignUp = () => {
       await createUserProfileDocument(user);
       setInProgress(false);
     } catch (error) {
-      console.error(error);
       setInProgress(false);
     }
   };
+
   const classes = useStyles();
   return (
     <div className={classes.background}>
-      {/* Logo */}
       <form className={classes.container} onSubmit={onSignUpSubmit}>
         <TextField
           id="email-input"
@@ -76,19 +73,6 @@ const SignUp = () => {
           onChange={changeEmail}
           value={email}
         />
-        {/* <TextField
-          id="login-input"
-          label="Логин"
-          className={classes.textField}
-          type="text"
-          name="login"
-          autoComplete="login"
-          margin="normal"
-          variant="outlined"
-          shrink
-          value={username}
-          onChange={changeUsername}
-        /> */}
         <TextField
           id="password-inupt"
           label="Пароль"
@@ -105,7 +89,7 @@ const SignUp = () => {
         <div className={classes.buttonsWrapper}>
           <Button
             component={Link}
-            to={"/"}
+            to={'/'}
             variant="contained"
             color="secondary"
             className={classes.button}
@@ -122,19 +106,15 @@ const SignUp = () => {
             Регистрация
           </Button>
         </div>
-          <Button
-            onClick={signInWithGoogle}
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            type="submit"
-          >
-            Войти с Google
-          </Button>
-        {/* Login Field */}
-        {/* Password Field*/}
-        {/* Cancel Button*/}
-        {/* Submit Button*/}
+        <Button
+          onClick={signInWithGoogle}
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          type="submit"
+        >
+          Войти с Google
+        </Button>
       </form>
     </div>
   );

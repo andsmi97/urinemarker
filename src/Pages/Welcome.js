@@ -1,46 +1,37 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { signInWithGoogle } from "../firebase/utils.js";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import { signInWithGoogle } from '../firebase/utils.js';
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
-    width: 240
+    width: 240,
   },
   buttonsWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column"
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   background: {
-    height: "100vh",
-    width: "100vw",
+    height: '100vh',
+    width: '100vw',
     background: theme.palette.primary.light,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  }
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
 
 const Welcome = () => {
   const classes = useStyles();
+  //TODO: Landing goes here
   return (
     <div className={classes.background}>
-      {/* Logo */}
       <div className={classes.buttonsWrapper}>
-        {/* <Button
-          component={Link}
-          to={"/camera"}
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-        >
-          Сделать Тест
-        </Button> */}
         <Button
           component={Link}
-          to={"/signin"}
+          to={'/signin'}
           variant="contained"
           color="secondary"
           className={classes.button}
@@ -49,7 +40,7 @@ const Welcome = () => {
         </Button>
         <Button
           component={Link}
-          to={"/signup"}
+          to={'/signup'}
           variant="contained"
           color="secondary"
           className={classes.button}

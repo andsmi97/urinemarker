@@ -1,18 +1,19 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
   card: {
     width: 345,
     margin: 8,
-    minHeight: 75
+    minHeight: 75,
   },
   avatar: {
-    backgroundColor: theme.palette.secondary.main
-  }
+    backgroundColor: theme.palette.secondary.main,
+    fontSize: 16,
+  },
 }));
 
 const ResultCard = props => {
@@ -30,7 +31,6 @@ const ResultCard = props => {
           title={props.fullName}
           subheader={`${props.value} ${props.metric}`}
         />
-        <div>render</div>
       </Card>
       {/* Component Difference*/}
       {/* Component Status*/}
