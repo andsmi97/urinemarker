@@ -7,10 +7,9 @@ const create = async (req, res) => {
     const owner = req.user.user_id;
     const analysis = { LEU, KET, NIT, URO, BIL, PRO, GLU, SG, BLD, pH, owner };
     const docRef = await db.collection('analyzes').add(analysis);
-    console.log('Document written with ID: ', docRef.id);
     return res.sendStatus(201).json(docRef);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return res.status(403);
   }
 };
@@ -23,10 +22,9 @@ const all = async (req, res) => {
       .where('owner', '==', owner)
       .get();
     const results = querySnapshot.map(doc => ({ ...doc.data(), id: doc.id }));
-    console.log(results);
     return res.status(200).json(results);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return res.status(403);
   }
 };

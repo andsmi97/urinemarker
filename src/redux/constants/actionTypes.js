@@ -1,9 +1,0 @@
-export const APP_LOAD = 'APP_LOAD';
-export const REDIRECT = 'REDIRECT';
-export const LOGOUT = 'LOGOUT';
-export const LOGIN = 'LOGIN';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-export const SNACK_STATUS_CLOSE = 'SNACK_STATUS_CLOSE';
-export const SNACK_STATUS_OPEN = 'SNACK_STATUS_OPEN';
-export const ASYNC_START = 'ASYNC_START';
-export const ASYNC_END = 'ASYNC_END';

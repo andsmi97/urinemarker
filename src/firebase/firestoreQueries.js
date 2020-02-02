@@ -10,16 +10,13 @@ const Analyzes = {
       owner: currentUser.id,
       date: new Date(),
     }),
-  getOne: async id =>
-    await (
-      await analyzes
-        .doc(id)
-        .where('owner', '==', currentUser.id)
-        .get()
-    ).data(),
+  getOne: async id => await (await analyzes.doc(id).get()).data(),
   getAll: async () => {
     return await (
-      await analyzes.where('owner', '==', currentUser.id).get()
+      await analyzes
+        .where('owner', '==', currentUser.id)
+        .orderBy('date', 'desc')
+        .get()
     ).docs.map(doc => {
       const data = doc.data();
       return {

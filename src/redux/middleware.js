@@ -1,4 +1,4 @@
-import { ASYNC_START, ASYNC_END } from './constants/actionTypes';
+import { ASYNC_START, ASYNC_END } from './reducers/common/constants';
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {

@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react';
-import { Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Loader from './Components/Loader';
-// import Home from './Pages/Home';
-// import Landing from './Pages/Landing';
-import Welcome from './Pages/Welcome';
-import { ConnectedRouter } from 'connected-react-router';
-import Routes from './Routes';
+import { push } from 'connected-react-router';
+import Loader from './Components/Loader/Component';
+import Snack from './Components/Snack/Component';
+import Router from './Router';
 import { auth, createUserProfileDocument } from './firebase/utils.js';
-import agent from './agent';
-import { history } from './redux/store';
 import { connect } from 'react-redux';
-import { SET_CURRENT_USER, APP_LOAD } from './redux/constants/actionTypes';
+import { store } from './redux/store';
+import { onUserChange, closeSnack } from './redux/reducers/common/actions';
 
 const theme = createMuiTheme({
   palette: {
@@ -22,21 +18,33 @@ const theme = createMuiTheme({
 });
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser,
   appLoaded: state.common.appLoaded,
+  redirectTo: state.common.redirectTo,
+  snackStatus: state.common.snackStatus,
+  snackMessage: state.common.snackMessage,
+  snackType: state.common.snackType,
+  authState: state.common.authState,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAppLoad: () => dispatch({ type: APP_LOAD }),
-  setCurrentUser: user => dispatch({ type: SET_CURRENT_USER, payload: user }),
+  setCurrentUser: user => dispatch(onUserChange(user)),
+  handleCloseSnackBar: () => dispatch(closeSnack()),
 });
 
-const App = ({ currentUser, appLoaded, onAppLoad, setCurrentUser }) => {
+const App = ({
+  appLoaded,
+  setCurrentUser,
+  redirectTo,
+  snackStatus,
+  snackMessage,
+  handleCloseSnackBar,
+  snackType,
+  authState,
+}) => {
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const token = await userAuth.getIdToken();
-        agent.setToken(token);
         const userRef = await createUserProfileDocument(userAuth);
         if (userRef === undefined) {
           setCurrentUser(userAuth);
@@ -53,23 +61,24 @@ const App = ({ currentUser, appLoaded, onAppLoad, setCurrentUser }) => {
       } else {
         setCurrentUser(userAuth);
       }
-      onAppLoad();
     });
     return () => unsubscribeFromAuth();
-  }, [onAppLoad, setCurrentUser]);
+  }, [setCurrentUser, authState]);
+
+  useEffect(() => {
+    store.dispatch(push(redirectTo));
+  }, [redirectTo]);
 
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <ConnectedRouter history={history}>
-        <Switch>
-          {appLoaded ? (
-            <>{currentUser ? <Routes /> : <Welcome />}</>
-          ) : (
-            <Loader />
-          )}
-        </Switch>
-      </ConnectedRouter>
+      {appLoaded ? <Router /> : <Loader />}
+      <Snack
+        open={snackStatus}
+        variant={snackType}
+        message={snackMessage}
+        onClose={handleCloseSnackBar}
+      ></Snack>
     </MuiThemeProvider>
   );
 };
