@@ -6,7 +6,7 @@ export const useStyles = makeStyles(theme => ({
   },
   textField: {
     width: '100%',
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
   textFieldWrapper: {
     display: 'flex',
@@ -34,7 +34,6 @@ export const useStyles = makeStyles(theme => ({
     height: '1.1875em',
     margin: '0',
     display: 'block',
-    padding: '6px 0 7px',
     minWidth: '0',
     background: 'none',
     boxSizing: 'content-box',

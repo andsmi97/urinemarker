@@ -28,9 +28,22 @@ const Analyzes = {
   },
 };
 
+const orders = db.collection('orders');
+
+const Orders = {
+  create: async (name, phone, amount) =>
+    await orders.add({
+      name,
+      phone,
+      amount,
+      date: new Date(),
+    }),
+};
+
 export default {
   setCurrentUser: _currentUser => {
     currentUser = _currentUser;
   },
   Analyzes,
+  Orders,
 };

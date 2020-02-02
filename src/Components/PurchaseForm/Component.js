@@ -7,58 +7,20 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Phone from '@material-ui/icons/Phone';
-import MaskedInput from 'react-text-mask';
-import PriceCalculator from './PriceCalculator';
-import PropTypes from 'prop-types';
-import { useStyles } from 'styles';
+import PriceCalculator from '../PriceCalculator/Component';
+import { useStyles } from './styles';
 
-const TextMaskCustom = props => {
-  const { inputRef, ...other } = props;
-
-  return (
-    <MaskedInput
-      {...other}
-      ref={ref => {
-        inputRef(ref ? ref.inputElement : null);
-      }}
-      mask={[
-        '+',
-        '7',
-        '(',
-        '9',
-        /\d/,
-        /\d/,
-        ')',
-        /\d/,
-        /\d/,
-        /\d/,
-        '-',
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-      ]}
-      placeholderChar={'_'}
-      showMask
-    />
-  );
-};
-TextMaskCustom.propTypes = {
-  inputRef: PropTypes.func.isRequired,
-};
-export default function ResponsiveDialog() {
+const PurchaseForm = ({ onCreateOrder, isLoading }) => {
+  console.log(onCreateOrder, isLoading);
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const [phoneNumber, setPhoneNumber] = useState('+7(  )   -    ');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [name, setName] = useState('');
   const onTextFieldChange = setter => event => {
     setter(event.target.value);
@@ -109,29 +71,14 @@ export default function ResponsiveDialog() {
                 }}
               />
             </div>
-            <div className={classes.phoneFieldWrapper}>
-              {/* <FormControl>
-                <InputLabel htmlFor="formatted-text-mask-input">
-                  Телефон
-                </InputLabel>
-                <Input
-                  variant="filled"
-                  className={classes.phoneField}
-                  id="phone-text-field"
-                  label="Телефон"
-                  value={phoneNumber}
-                  onChnage={onTextFieldChange(setPhoneNumber)}
-                  inputComponent={TextMaskCustom}
-                />
-              </FormControl> */}
+            <div>
               <TextField
                 className={classes.textField}
                 variant="filled"
                 id="phone-text-field"
                 label="Телефон"
                 value={phoneNumber}
-                onChnage={onTextFieldChange(setPhoneNumber)}
-                inputComponent={TextMaskCustom}
+                onChange={onTextFieldChange(setPhoneNumber)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -145,11 +92,18 @@ export default function ResponsiveDialog() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button
+            onClick={() => onCreateOrder(name, phoneNumber)}
+            color="primary"
+            autoFocus
+            disabled={isLoading}
+          >
             Заказать
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
+
+export default PurchaseForm;

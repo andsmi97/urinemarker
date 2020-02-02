@@ -1,7 +1,7 @@
 import React from 'react';
-import AnalysisImage from '../assets/images/AnalysisImage.png';
+import AnalysisImage from '../../assets/images/AnalysisImage.png';
 import Grid from '@material-ui/core/Grid';
-import PurchaseForm from '../../Components/PurchaseForm/Component';
+import PurchaseForm from '../../Components/PurchaseForm/Container';
 import { useStyles } from './styles';
 
 const Welcome = () => {

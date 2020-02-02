@@ -4,7 +4,7 @@ import Home from './Pages/Home/Container';
 import SignIn from './Pages/SignIn/Container';
 import SignUp from './Pages/SignUp/Container';
 import Result from './Pages/Result/Container';
-import Welcome from './Pages/Welcome/Page';
+import Landing from './Pages/Landing/Page';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './redux/store';
@@ -32,7 +32,7 @@ const Router = ({ currentUser }) => {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" render={() => <Welcome />} />
+        <Route exact path="/" render={() => <Landing />} />
         <Route exact path="/signin" render={() => <SignIn />} />
         <Route exact path="/signup" render={() => <SignUp />} />
         <Route component={NotFound} />

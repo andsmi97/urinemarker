@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import img from '../assets/images/Background.png';
-import logo from '../assets/images/logo.png';
+import img from '../../assets/images/Background.png';
+import logo from '../../assets/images/logo.png';
 export const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
