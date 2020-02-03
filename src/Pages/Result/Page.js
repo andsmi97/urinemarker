@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import ResultCard from '../../Components/ResultCard/Component';
 import { Link } from 'react-router-dom';
 import { getDayTitle } from '../../functools';
@@ -46,7 +45,7 @@ const Result = ({
               key={index}
             />
           ))}
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           component={Link}
@@ -54,7 +53,7 @@ const Result = ({
           //TODO add functionality
         >
           Отправить врачу
-        </Button>
+        </Button> */}
       </div>
     </>
   );

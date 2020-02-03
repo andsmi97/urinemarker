@@ -18,6 +18,9 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
   },
   background: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: '100vh',
     width: '100vw',
     background: theme.palette.primary.light,

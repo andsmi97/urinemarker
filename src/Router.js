@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './redux/store';
 import NotFound from './Pages/NotFound/Container';
+import Welcome from './Pages/Welcome/Container';
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
 });
@@ -35,6 +36,7 @@ const Router = ({ currentUser }) => {
         <Route exact path="/" render={() => <Landing />} />
         <Route exact path="/signin" render={() => <SignIn />} />
         <Route exact path="/signup" render={() => <SignUp />} />
+        <Route exact path="/demo" render={() => <Welcome />} />
         <Route component={NotFound} />
       </Switch>
     </ConnectedRouter>

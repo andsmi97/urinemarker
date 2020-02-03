@@ -1,10 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { signInWithGoogle } from '../../firebase/utils.js';
 import { useStyles } from './styles';
 
-const Welcome = () => {
+const Welcome = ({ onGoogleSignIn, authInProgress }) => {
   const classes = useStyles();
   //TODO: Landing goes here
   return (
@@ -29,9 +28,10 @@ const Welcome = () => {
           Регистрация
         </Button>
         <Button
-          onClick={signInWithGoogle}
+          onClick={onGoogleSignIn}
           variant="contained"
           color="primary"
+          disabled={authInProgress}
           className={classes.button}
         >
           Войти с Google

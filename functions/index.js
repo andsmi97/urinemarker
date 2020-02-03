@@ -10,24 +10,25 @@ app.use(require('./Routes'));
 
 // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
 const gmailEmail = functions.config().gmail.email;
-const gmailPassword = functions.config().gmail.password;
+const yandexEmail = functions.config().yandex.email;
+const yandexPassword = functions.config().yandex.password;
 const mailTransport = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'Yandex',
   auth: {
-    user: gmailEmail,
-    pass: gmailPassword,
+    user: yandexEmail,
+    pass: yandexPassword,
   },
 });
 
 // Sends an email confirmation when a user orders kit.
-exports.sendEmailConfirmation = functions.database
-  .ref('/orders/{uid}')
-  .onWrite(async change => {
-    const snapshot = change.after;
-    const val = snapshot.val();
-
+exports.sendOrderEmail = functions.firestore
+  .document('/orders/{uid}')
+  .onCreate(async (snap, context) => {
+    const val = snap.data();
+    console.log(yandexEmail);
+    console.log(yandexPassword);
     const mailOptions = {
-      from: gmailEmail,
+      from: yandexEmail,
       to: gmailEmail,
       subject: 'Новая заявка',
       text: `
@@ -40,6 +41,7 @@ exports.sendEmailConfirmation = functions.database
 
     try {
       await mailTransport.sendMail(mailOptions);
+      console.log('send email');
     } catch (error) {
       console.error('There was an error while sending the email:', error);
     }

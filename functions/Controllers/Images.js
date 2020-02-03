@@ -32,7 +32,10 @@ const upload = (req, res) => {
         .jpeg({ quality: 70 })
         .toFile(outputFile)
         .then(() => {
-          res.status(200).json({
+          fs.unlink(image.path, err => {
+            if (err) console.error(err.toString());
+          });
+          return res.status(200).json({
             LEU: 0,
             BIL: 0,
             BLD: 0,
@@ -44,10 +47,9 @@ const upload = (req, res) => {
             URO: 0,
             pH: 0,
           });
-          fs.unlink(image.path, err => {
-            if (err) console.error(err.toString());
-          });
-        });
+        })
+        .catch(console.error);
+
       return res.sendStatus(200);
     }
   });

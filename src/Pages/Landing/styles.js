@@ -17,13 +17,15 @@ export const useStyles = makeStyles(theme => ({
     background: `url('${img}') no-repeat right`,
   },
   logo: {
-    width: '203px',
-    height: '114px',
+    width: '200px',
+    height: '100px',
     background: `url(${logo}) no-repeat center`,
+    backgroundSize: 'contain',
   },
   topBar: {
     display: 'flex',
     justifyContent: 'space-between',
+    paddingTop: 16,
     marginRight: 100,
     marginLeft: 100,
   },
@@ -51,5 +53,66 @@ export const useStyles = makeStyles(theme => ({
   purchaseButton: {
     width: '100px',
     color: 'white',
+  },
+  rightImage: {
+    width: '80%',
+  },
+  imageWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
+    justifyContent: 'center',
+  },
+  gridContainer: {
+    height: 'calc(100% - 116px)',
+  },
+  '@media screen and (max-width: 600px)': {
+    logo: {
+      width: '150px',
+      height: '75px',
+      background: `url(${logo}) no-repeat center`,
+      backgroundSize: 'contain',
+    },
+    imageWrapper: {
+      paddingTop: 16,
+    },
+    rightImage: {
+      width: '45%',
+    },
+    topBar: {
+      paddingTop: 16,
+      marginRight: 30,
+      marginLeft: 30,
+    },
+    phoneNumber: {
+      fontSize: 16,
+    },
+    mainHeaderText: {
+      padding: 16,
+      fontSize: 24,
+    },
+  },
+  '@media screen and (max-width: 357px)': {
+    logo: {
+      width: '100px',
+      height: '50px',
+      background: `url(${logo}) no-repeat center`,
+      backgroundSize: 'contain',
+    },
+    topBar: {
+      paddingTop: 16,
+      marginRight: 24,
+      marginLeft: 24,
+    },
+    phoneNumber: {
+      fontSize: 14,
+    },
+    mainHeaderText: {
+      fontSize: 20,
+    },
+    rightImage: {
+      marginTop: 16,
+      width: '50%',
+    },
   },
 }));

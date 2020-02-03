@@ -21,5 +21,8 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.light,
     height: '100vh',
     width: '100vw',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));

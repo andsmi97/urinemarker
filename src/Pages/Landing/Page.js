@@ -13,7 +13,7 @@ const Welcome = () => {
         <div className={classes.logo} />
         <div className={classes.phoneNumber}>+7 (917) 520 60 76</div>
       </div>
-      <Grid container>
+      <Grid container className={classes.gridContainer} alignContent="center">
         <Grid item xs={1} sm={1}></Grid>
         <Grid item xs={12} sm={4}>
           <div className={classes.leftPart}>
@@ -25,7 +25,13 @@ const Welcome = () => {
         </Grid>
         <Grid item xs={1} sm={1}></Grid>
         <Grid item xs={12} sm={6}>
-          <img src={AnalysisImage} alt="Анализ мочи" />
+          <div className={classes.imageWrapper}>
+            <img
+              className={classes.rightImage}
+              src={AnalysisImage}
+              alt="Анализ мочи"
+            />
+          </div>
         </Grid>
       </Grid>
     </div>

@@ -17,7 +17,7 @@ const Home = ({ analyzes, getAnalyzes, isLoading }) => {
       <div className={classes.background}>
         <h3 className={classes.title}>Последние анализы</h3>
         {isLoading && <Loader />}
-        {analyzes.length &&
+        {!!analyzes.length &&
           !isLoading &&
           analyzes.map(analysis => (
             <AnalysisCard

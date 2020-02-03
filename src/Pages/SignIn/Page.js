@@ -3,11 +3,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
-import { signInWithGoogle } from '../../firebase/utils.js';
+// import { signInWithGoogle } from '../../firebase/utils.js';
 import { useStyles } from './styles';
 
 //TODO Add Error handling
-const SignIn = ({ onSignIn, authInProgress }) => {
+const SignIn = ({ onSignIn, authInProgress, onGoogleSignIn }) => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -68,7 +68,7 @@ const SignIn = ({ onSignIn, authInProgress }) => {
           </Button>
         </div>
         <Button
-          onClick={signInWithGoogle}
+          onClick={onGoogleSignIn}
           variant="contained"
           color="primary"
           disabled={authInProgress}
