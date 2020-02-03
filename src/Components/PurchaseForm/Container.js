@@ -11,6 +11,7 @@ import {
   selectName,
   selectIsOrdersFetching,
   selectPurchaseFormStatus,
+  selectAmount,
 } from '../../redux/reducers/orders/selectors';
 
 const mapStateToProps = createStructuredSelector({
@@ -18,10 +19,12 @@ const mapStateToProps = createStructuredSelector({
   phoneNumber: selectPhoneNumber,
   name: selectName,
   purchaseFormStatus: selectPurchaseFormStatus,
+  amount: selectAmount,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateOrder: (name, phone) => dispatch(createOrder(name, phone)),
+  onCreateOrder: (name, phone, amount) =>
+    dispatch(createOrder(name, phone, amount)),
   onFieldChange: (field, value) => dispatch(onFieldChange(field, value)),
   onPurchaseFormChangeStatus: status =>
     dispatch(onPurchaseFormChangeStatus(status)),

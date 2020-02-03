@@ -22,6 +22,7 @@ const PurchaseForm = ({
   onFieldChange,
   purchaseFormStatus,
   onPurchaseFormChangeStatus,
+  amount,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -94,7 +95,7 @@ const PurchaseForm = ({
             Отмена
           </Button>
           <Button
-            onClick={() => onCreateOrder(name, phoneNumber)}
+            onClick={() => onCreateOrder(name, phoneNumber, amount)}
             color="primary"
             disabled={isLoading}
           >

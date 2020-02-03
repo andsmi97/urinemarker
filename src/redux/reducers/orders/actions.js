@@ -33,11 +33,11 @@ export const createOrderFailure = () => ({
   type: CREATE_ORDER_FAILURE,
 });
 
-export const createOrder = (name, phone) => async dispatch => {
+export const createOrder = (name, phone, amount) => async dispatch => {
   dispatch(createOrderStart());
   try {
     //TODO add amount
-    await firestoreQueries.Orders.create(name, phone, 1);
+    await firestoreQueries.Orders.create(name, phone, amount);
     dispatch(createOrderSuccess());
     dispatch(
       openSnack({

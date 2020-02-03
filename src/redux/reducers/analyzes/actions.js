@@ -88,17 +88,27 @@ export const createAnalysis = file => async dispatch => {
   reader.readAsDataURL(file);
   reader.onloadend = async () => {
     //We are removing first 23 letters of base64 type, since api doesn't need those.
-    const predicted = await agent.ColorDetector.predict(
-      reader.result.slice(23)
-    );
-    if (!predicted.error) {
-      const result = await firestoreQueries.Analyzes.create(predicted);
-      await uploadImage({ file, id: result.id });
-      dispatch(createAnalysisSuccess());
-      dispatch(redirect(`/result/${result.id}`));
-    } else {
-      dispatch(openSnack({ type: 'error', message: predicted.error }));
-      await uploadImage({ file, error: predicted.error });
+    try {
+      const predicted = await agent.ColorDetector.predict(
+        reader.result.slice(23)
+      );
+      if (!predicted.error) {
+        const result = await firestoreQueries.Analyzes.create(predicted);
+        await uploadImage({ file, id: result.id });
+        dispatch(createAnalysisSuccess());
+        dispatch(redirect(`/result/${result.id}`));
+      } else {
+        dispatch(openSnack({ type: 'error', message: predicted.error }));
+        await uploadImage({ file, error: predicted.error });
+        dispatch(createAnalysisFailure());
+      }
+    } catch (e) {
+      dispatch(
+        openSnack({
+          type: 'error',
+          message: 'Возникла ошибка, повторите позже',
+        })
+      );
       dispatch(createAnalysisFailure());
     }
   };

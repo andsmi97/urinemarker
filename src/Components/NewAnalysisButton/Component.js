@@ -8,7 +8,6 @@ const NewAnalysisButton = ({ onCreateAnalysis, isLoading }) => {
 
   const handleFile = event => {
     const file = event.target.files[0];
-    console.log(file);
     onCreateAnalysis(file);
   };
 
