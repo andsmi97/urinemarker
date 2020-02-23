@@ -85,7 +85,7 @@ const PurchaseForm = ({
               }}
             />
           </div>
-          <PriceCalculator price={259} />
+          <PriceCalculator price={349} />
         </DialogContent>
         <DialogActions>
           <Button
