@@ -1,17 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(theme => ({
   main: {
-    // flexWrap: 'nowrap',
-    // padding: 32,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    // overflowX: 'auto',
-    // WebkitOverflowScrolling: 'touch',
-    // width: '100%',
+    width: '100%',
   },
   item: {
-    // minWidth: '300px',
+    outline: 'none',
+    userSelect: 'none',
     display: 'flex!important',
     justifyContent: 'center',
     alignItems: 'center',

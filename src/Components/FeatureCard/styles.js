@@ -9,6 +9,7 @@ export const useStyles = makeStyles(theme => ({
     boxShadow: '0 15px 30px rgba(0,0,0,0.16)',
     padding: 16,
     borderRadius: 20,
+    background: 'white',
     transition: 'all .7s ease',
     '&:hover': {
       boxShadow: '0 15px 40px rgba(0,0,0,0.4)',

@@ -18,7 +18,6 @@ const BottomMenu = props => {
     <>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          {/*TODO: change onCLick*/}
           <Drawer />
           <NewAnalysisButton />
         </Toolbar>

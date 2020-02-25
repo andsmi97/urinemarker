@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import { useStyles } from './styles';
 const PriceCalculator = ({ price, itemsAmount, onFieldChange }) => {
   const classes = useStyles();
-  // const [itemsAmount, setItemsAmount] = useState(1);
   const onItemChange = event => {
     const value = event.target.value;
     if (!value) {

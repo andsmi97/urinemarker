@@ -28,7 +28,6 @@ const upload = (req, res) => {
       // });
       await imageLink.save();
       sharp(image.path)
-        // .resize(700)
         .jpeg({ quality: 70 })
         .toFile(outputFile)
         .then(() => {

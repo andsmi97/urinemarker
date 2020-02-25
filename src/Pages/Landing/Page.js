@@ -6,9 +6,10 @@ import { useStyles } from './styles';
 import PartnersList from '../../Components/PartnersList/Component';
 import Features from '../../Components/Feautres/Component';
 import Team from '../../Components/Team/Component';
-import ContactUs from '../../Components/ContactUs/Component';
+import ContactUs from '../../Components/ContactUs/Container';
 import FAQ from '../../Components/FAQ/Component';
-import NewsLetter from '../../Components/NewsLetter/Component';
+import NewsLetter from '../../Components/NewsLetter/Container';
+import HowItWorks from '../../Components/HowItWorks/Component';
 const Welcome = () => {
   const classes = useStyles();
   //TODO: Landing goes here
@@ -42,6 +43,7 @@ const Welcome = () => {
         </Grid>
       </div>
       <PartnersList />
+      <HowItWorks />
       <Features />
       <Team />
       <FAQ />

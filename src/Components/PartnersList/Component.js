@@ -15,8 +15,32 @@ const AnalysisCard = () => {
     slidesToScroll: 1,
     autoplaySpeed: 10000,
     slidesToShow: 4,
+    pauseOnHover: false,
+    swipeToSlide: true,
+    arrows: false,
     speed: 1000,
     cssEase: 'ease',
+    infinity: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 766,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   return (
     <Slider {...settings} className={classes.main}>

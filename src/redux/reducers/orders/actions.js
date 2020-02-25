@@ -7,7 +7,6 @@ import {
 } from './constants';
 import { openSnack } from '../common/actions';
 import firestoreQueries from '../../../firebase/firestoreQueries';
-// import agent from '../../../agent';
 
 export const onFieldChange = (field, value) => ({
   type: CHANGE_FIELD,

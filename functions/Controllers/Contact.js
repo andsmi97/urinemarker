@@ -1,6 +1,10 @@
 const admin = require('firebase-admin');
 const db = admin.firestore();
-const { mailTransport, yandexEmail } = require('../config/mailConfig');
+const {
+  mailTransport,
+  yandexEmail,
+  gmailEmail,
+} = require('../config/mailConfig');
 const subscirbe = async (req, res) => {
   try {
     const { email } = req.body;
@@ -24,6 +28,30 @@ const unsubscribe = async (req, res) => {
     return res.status(403);
   }
 };
+const resubscribeById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const subscriber = db.collection('subscribers').doc(id);
+    const updated = await subscriber.update({ active: true });
+    return res.status(200).json(updated);
+  } catch (e) {
+    console.error(e);
+    return res.status(403);
+  }
+};
+
+//TODO: Not sure if that's work
+const resubscribeByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const subscriber = db.collection('subscribers').doc({ email });
+    const updated = await subscriber.update({ active: true });
+    return res.status(200).json(updated);
+  } catch (e) {
+    console.error(e);
+    return res.status(403);
+  }
+};
 
 const sendMessage = async (req, res) => {
   try {
@@ -32,7 +60,7 @@ const sendMessage = async (req, res) => {
     await db.collection('messages').add(docMessage);
     const mailOptions = {
       from: yandexEmail,
-      to: yandexEmail,
+      to: gmailEmail,
       subject: 'Сообщение с сайта',
       text: `
       Имя: ${name}
@@ -53,4 +81,6 @@ module.exports = {
   subscirbe,
   unsubscribe,
   sendMessage,
+  resubscribeById,
+  resubscribeByEmail,
 };

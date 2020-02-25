@@ -1,10 +1,10 @@
 import React from 'react';
 import { useStyles } from './styles';
 import FeatureCard from '../FeatureCard/Component';
-import imageOne from '../../assets/images/FeatureCards/1.png';
-import imageTwo from '../../assets/images/FeatureCards/2.png';
-import imageThree from '../../assets/images/FeatureCards/3.png';
-import imageFour from '../../assets/images/FeatureCards/4.png';
+import imageOne from '../../assets/images/FeatureCards/1.svg';
+import imageTwo from '../../assets/images/FeatureCards/2.svg';
+import imageThree from '../../assets/images/FeatureCards/3.svg';
+import imageFour from '../../assets/images/FeatureCards/4.svg';
 import Grid from '@material-ui/core/Grid';
 
 const Features = () => {

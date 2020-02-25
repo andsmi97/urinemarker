@@ -4,7 +4,7 @@ import _superagent from 'superagent';
 const superagent = superagentPromise(_superagent, global.Promise);
 
 //TODO CHANGE API ROUTE
-const API_ROOT = 'https://urinemark.ru/api';
+const API_ROOT = 'https://us-central1-urinemarker.cloudfunctions.net/api';
 
 const responseBody = res => res.body;
 
@@ -52,10 +52,17 @@ const ColorDetector = {
       )
       .then(responseBody),
 };
+
+const contact = {
+  subscribe: email => requests.post('/contact/subscribe', { email }),
+  sendMessage: (name, email, message) =>
+    requests.post('/contact/sendMessage', { name, email, message }),
+};
 export default {
   setToken: _token => {
     token = _token;
   },
   ColorDetector,
   Image,
+  contact,
 };

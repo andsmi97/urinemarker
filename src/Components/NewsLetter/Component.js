@@ -6,17 +6,27 @@ import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
 
-const ContactUs = () => {
+const NewsLetter = ({ setFieldValue, subscribe, email, isLoading }) => {
   const classes = useStyles();
+  const submit = async e => {
+    e.preventDefault();
+    try {
+      await subscribe(email);
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <div className={classes.background}>
       <h2 className={classes.header}>Новостная рассылка</h2>
-      <div className={classes.fieldsWrapper}>
+      <form className={classes.fieldsWrapper} onSubmit={submit}>
         <TextField
           className={classes.inputField}
           label="Email"
           variant="outlined"
           type="email"
+          onChange={e => setFieldValue('email', e.target.value)}
+          value={email}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -25,12 +35,17 @@ const ContactUs = () => {
             ),
           }}
         />
-        <Button variant="contained" className={classes.button}>
-          Отправить
+        <Button
+          variant="contained"
+          className={classes.button}
+          type="submit"
+          disabled={isLoading}
+        >
+          Подписаться
         </Button>
-      </div>
+      </form>
     </div>
   );
 };
 
-export default ContactUs;
+export default NewsLetter;

@@ -45,15 +45,6 @@ const Result = ({
               key={index}
             />
           ))}
-        {/* <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to={'/'}
-          //TODO add functionality
-        >
-          Отправить врачу
-        </Button> */}
       </div>
     </>
   );

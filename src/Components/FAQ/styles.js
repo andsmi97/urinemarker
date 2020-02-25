@@ -30,6 +30,12 @@ export const useContentStyles = makeStyles(theme => ({
   },
 }));
 export const useComponentStyles = makeStyles(theme => ({
+  background: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
   header: {
     textAlign: 'center',
     fontWeight: 'bold',
