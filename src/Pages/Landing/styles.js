@@ -13,7 +13,6 @@ export const useStyles = makeStyles(theme => ({
   },
   background: {
     height: '100vh',
-    width: '100vw',
     background: `url('${img}') no-repeat right`,
   },
   logo: {
@@ -55,7 +54,7 @@ export const useStyles = makeStyles(theme => ({
     color: 'white',
   },
   rightImage: {
-    width: '80%',
+    width: '60%',
   },
   imageWrapper: {
     display: 'flex',

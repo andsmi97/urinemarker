@@ -3,6 +3,9 @@ export const useStyles = makeStyles(theme => ({
   purchaseButton: {
     width: '100px',
     color: 'white',
+    borderRadius: 50,
+    paddingLeft: 80,
+    paddingRight: 80,
   },
   textField: {
     width: '100%',
