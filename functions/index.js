@@ -4,29 +4,21 @@ admin.initializeApp();
 const express = require('express');
 const app = express();
 const cors = require('cors')();
-const nodemailer = require('nodemailer');
+const {
+  mailTransport,
+  yandexEmail,
+  gmailEmail,
+} = require('./config/mailConfig');
 app.use(cors);
 app.use(require('./Routes'));
 
 // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
-const gmailEmail = functions.config().gmail.email;
-const yandexEmail = functions.config().yandex.email;
-const yandexPassword = functions.config().yandex.password;
-const mailTransport = nodemailer.createTransport({
-  service: 'Yandex',
-  auth: {
-    user: yandexEmail,
-    pass: yandexPassword,
-  },
-});
 
 // Sends an email confirmation when a user orders kit.
 exports.sendOrderEmail = functions.firestore
   .document('/orders/{uid}')
   .onCreate(async (snap, context) => {
     const val = snap.data();
-    console.log(yandexEmail);
-    console.log(yandexPassword);
     const mailOptions = {
       from: yandexEmail,
       to: gmailEmail,
