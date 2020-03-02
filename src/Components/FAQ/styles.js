@@ -35,6 +35,7 @@ export const useComponentStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    background: theme.palette.primary.light,
   },
   header: {
     textAlign: 'center',

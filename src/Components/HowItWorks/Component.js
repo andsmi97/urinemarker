@@ -5,17 +5,17 @@ import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import { useStyles } from './styles';
 import StepConnector from '@material-ui/core/StepConnector';
-import image1 from '../../assets/images/HowItWorks/1.svg';
-import image2 from '../../assets/images/HowItWorks/2.svg';
-import image3 from '../../assets/images/HowItWorks/3.svg';
-import image4 from '../../assets/images/HowItWorks/4.svg';
+import image1 from '../../assets/images/HowItWorks/1.png';
+import image2 from '../../assets/images/HowItWorks/2.png';
+import image3 from '../../assets/images/HowItWorks/3.png';
+import image4 from '../../assets/images/HowItWorks/4.png';
 
 const getSteps = () => {
   return [
-    'Окуните тест-полоску в ёмкость с мочой и положите тест-полоску на цветовую панель',
-    'Подождите 2 минуты, сфотографируйте тестполоску на цветовой панели',
-    'Получите рекомендацию',
-    'Отправьте рекомендацию врачу',
+    'Откройте приложение',
+    'Сфотографируйте палитру с тест-полоской',
+    'Подождите несколько секнуд',
+    'Смотрите результат анализа',
   ];
 };
 
@@ -64,8 +64,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
             <img
               src={currentContent.src}
               alt={currentContent.alt}
-              //TODO: remove this
-              width="50%"
+              width="100%"
             />
           </div>
         </Grid>

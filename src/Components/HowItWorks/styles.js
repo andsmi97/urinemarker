@@ -23,7 +23,7 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
   },
   stepperRoot: {
-    backgroundColor: '#fafafa',
+    backgroundColor: 'rgba(0,0,0,0)',
   },
   paper: { display: 'flex', justifyContent: 'center', alignItems: 'center' },
   step: {

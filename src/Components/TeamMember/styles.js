@@ -6,6 +6,12 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 300,
+    position: 'relative',
+    '&:hover >  .imageWrapper': {
+      // imageWrapper: {
+      opacity: 0.8,
+      // },
+    },
   },
   title: {
     textAlign: 'center',
@@ -20,5 +26,14 @@ export const useStyles = makeStyles(theme => ({
   description: {
     textAlign: 'center',
     margin: 0,
+  },
+  icon: {
+    fontSize: 30,
+    margin: 8,
+    color: 'black',
+    '&:hover': {
+      color: theme.palette.primary.dark,
+      cursor: 'pointer',
+    },
   },
 }));

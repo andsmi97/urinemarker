@@ -31,6 +31,7 @@ const Team = () => {
             name="Адамян Карен"
             title="CEO"
             description="МФТИ"
+            vk=""
           />
         </Grid>
         <Grid item xs={12} md={3} sm={6}>
@@ -39,6 +40,7 @@ const Team = () => {
             name="Биктимиров Расим"
             title="COO"
             description="Сеченовский университет"
+            vk=""
           />
         </Grid>
         <Grid item xs={12} md={3} sm={6}>
@@ -47,6 +49,8 @@ const Team = () => {
             name="Белов Александр"
             title="CTO"
             description="Сколтех"
+            linkedIn=""
+            gitHub=""
           />
         </Grid>
         <Grid item xs={12} md={3} sm={6}>
@@ -55,6 +59,8 @@ const Team = () => {
             name="Смирнов Андрей"
             title="CMO"
             description="Сколтех"
+            gitHub="https://github.com/andsmi97"
+            linkedIn="www.linkedin.com/in/andsmi97"
           />
         </Grid>
       </Grid>

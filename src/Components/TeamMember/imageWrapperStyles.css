@@ -1,0 +1,19 @@
+.imageWrapper {
+  left: 0px;
+  right: 0px;
+  top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100px;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  background-color: #9be7ff;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}

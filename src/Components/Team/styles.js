@@ -9,7 +9,7 @@ export const useStyles = makeStyles(theme => ({
     margin: 0,
   },
   teamWrapper: {
-    backgroundColor: '#9BE7FF',
+    // backgroundColor: '#9BE7FF',
     paddingTop: 64,
     paddingBottom: 64,
 
