@@ -1,9 +1,10 @@
 export const config = {
-    apiKey: "AIzaSyD_76fUWFWTXYGL8HUeZtzf4wByG2Dze2M",
-    authDomain: "urinemarker.firebaseapp.com",
-    databaseURL: "https://urinemarker.firebaseio.com",
-    projectId: "urinemarker",
-    storageBucket: "urinemarker.appspot.com",
-    messagingSenderId: "229868967798",
-    appId: "1:229868967798:web:e536cc158cf5e3a851cc57"
-  };
+  apiKey: 'AIzaSyBcXRkpEtk1jJsVk-0PSUlu-efJP00H_5M',
+  authDomain: 'ubox-58364.firebaseapp.com',
+  databaseURL: 'https://ubox-58364.firebaseio.com',
+  projectId: 'ubox-58364',
+  storageBucket: 'ubox-58364.appspot.com',
+  messagingSenderId: '868316500200',
+  appId: '1:868316500200:web:2400fcaa6ccc527b19395d',
+  measurementId: 'G-XQGWW0GKJ4',
+};

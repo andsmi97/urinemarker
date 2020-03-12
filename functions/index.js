@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-admin.initializeApp();
+admin.initializeApp({ storageBucket: 'u-box-f86ac.appspot.com' });
 const express = require('express');
 const app = express();
 const cors = require('cors')();
@@ -14,4 +14,4 @@ exports.sendSubscribeEmail = firestoreFunctions.onSubscribe;
 exports.sendUnsubscribeEmail = firestoreFunctions.onUnsubscribe;
 
 // Expose the API as a function
-exports.api = functions.https.onRequest(app);
+exports.api = functions.region('europe-west1').https.onRequest(app);

@@ -5,5 +5,6 @@ const authenticate = require('./auth');
 router.post('/', authenticate, analyzes.create);
 router.get('/', authenticate, analyzes.all);
 router.get('/:id', authenticate, analyzes.one);
+router.post('/sendAnalysis/:id', analyzes.sendAnalysis);
 
 module.exports = router;
